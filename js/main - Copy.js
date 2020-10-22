@@ -29,7 +29,7 @@ params = {
         'emissivity': 0.83,
         'width': 3.6,
         'height': 1.8,
-        'xposition': 0.85,
+        'xposition': 0.5,
         'yposition': 1,
       },
     },
@@ -109,7 +109,6 @@ params = {
       },
     },
     'display': 'MRT',
-    'TimeOfDay': '9am',
     'autoscale': true,
     'scaleMin': 20.0,
     'scaleMax': 40.0,
@@ -1081,15 +1080,6 @@ function init() {
           'PMV'
   ]).onFinishChange(function(){ do_fast_stuff(); });
 
-  // gui.add(params, 'TimeOfDay', [
-  //         '9am', '10am'
-  // ]).onFinishChange(function(){ do_fast_stuff(); });
-
-  gui.add(params, 'TimeOfDay', [
-          '9am', '11am', '12pm', '2pm', '3pm', '4pm', '5pm',
-          '6pm', '7pm'
-  ]).onFinishChange(function(){ do_fast_stuff(); });
-
   gui.add(params, 'autoscale')
     .onFinishChange(function(){ do_fast_stuff(); });
   gui.add(params, 'scaleMax').min(0).max(100).step(0.1)
@@ -1355,52 +1345,6 @@ function update_shortwave_components() {
 
   var window_objects = get_window_objects();
   var window_object_vfs = get_window_object_vfs(solarcal.window_objects);
-
-  if (params.TimeOfDay == '9am'){
-    solarcal.az = 90;
-    solarcal.alt = 38;
-    solarcal.Idir = 812;
-    // solarcal = {
-    //     'alt': 80,
-    //     'az': 100,
-    //     'fbes': 0.5,
-    //     'Idir': 700,
-    //     'asa': 0.7,
-    // };
-  } else if (params.TimeOfDay == '11am'){
-    solarcal.az = 116;
-    solarcal.alt = 60;
-    solarcal.Idir = 883;
-  } else if (params.TimeOfDay == '12pm'){
-    solarcal.az = 140;
-    solarcal.alt = 69;
-    solarcal.Idir = 884;
-  } else if (params.TimeOfDay == '2pm'){
-    solarcal.az = 222;
-    solarcal.alt = 69;
-    solarcal.Idir = 884;
-  } else if (params.TimeOfDay == '3pm'){
-    solarcal.az = 245;
-    solarcal.alt = 59;
-    solarcal.Idir = 882;
-  } else if (params.TimeOfDay == '4pm'){
-    solarcal.az = 260;
-    solarcal.alt = 48;
-    solarcal.Idir = 864;
-  } else if (params.TimeOfDay == '5pm'){
-    solarcal.az = 270;
-    solarcal.alt = 37;
-    solarcal.Idir = 806;
-  } else if (params.TimeOfDay == '6pm'){
-    solarcal.az = 279;
-    solarcal.alt = 26;
-    solarcal.Idir = 687;
-  } else if (params.TimeOfDay == '7pm'){
-    solarcal.az = 288;
-    solarcal.alt = 15;
-    solarcal.Idir = 489;
-  }
-
 
   var r = 1.3 * _.max(mrt.room);
 
